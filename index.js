@@ -1,13 +1,17 @@
 const mongoose = require ("mongoose");
 const express= require ("express");
+const dotenv = require ("dotenv");
+
 
 const app = express();
 const port = 5000;
 
+dotenv.config();
 app.use(express.json());
+// console.log(process.env.MONGODB_URL);
 
 async function main(){
-    await mongoose.connect("");
+    await mongoose.connect(process.env.MONGODB_URL);
 }
 
 main()
@@ -19,5 +23,5 @@ app.get("/", (req, res) =>{
 });
 
 app.listen(port, () => {
-    console.log(`App listening to http://localhost${port}`);
+    console.log(`App listening to http://localhost:${port}`);
 });

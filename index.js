@@ -2,15 +2,14 @@ const mongoose = require ("mongoose");
 const express= require ("express");
 const dotenv = require ("dotenv");
 const authRoute = require ("./routes/auth.js");
-
-
-
 const app = express();
-const port = 5000;
-
 dotenv.config();
 app.use(express.json());
-// console.log(process.env.MONGODB_URL);
+
+const port = process.env.PORT;
+
+
+
 
 async function main(){
     await mongoose.connect(process.env.MONGODB_URL);
@@ -27,5 +26,5 @@ app.get("/", (req, res) =>{
 app.use('/api/auth', authRoute);
 
 app.listen(port, () => {
-    console.log(`App listening to http://localhost:${port}`);
+    console.log(`App listening to port ${port}`);
 });
